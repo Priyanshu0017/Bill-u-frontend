@@ -1,0 +1,23 @@
+/* Custom scrollbar track (path) style for all scrollable areas */
+::-webkit-scrollbar {
+	width: 8px;
+	background: #f3f4f6; /* light gray, matches Tailwind's gray-100 */
+	border-radius: 8px;
+}
+::-webkit-scrollbar-thumb {
+	background: #d1d5db; /* Tailwind's gray-300 */
+	border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+	background: #f3f4f6; /* light gray for the path */
+	border-radius: 8px;
+}
+/* Remove unwanted border/outline from Recharts charts on click/focus */
+.recharts-wrapper:focus,
+.recharts-wrapper:active,
+.recharts-wrapper svg:focus,
+.recharts-wrapper svg:active {
+	outline: none !important;
+	border: none !important;
+}
+@import "tailwindcss";
