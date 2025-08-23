@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { useMutation, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 const AuthContext = createContext();
 
@@ -57,31 +57,7 @@ export const AuthProvider = ({ children }) => {
     },
   });
 
-  // Register mutation
-  const registerMutation = useMutation({
-    mutationFn: async (data) => {
-      const res = await fetch(`${API_BASE}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) throw new Error("Registration failed");
-      return res.json();
-    },
-    onSuccess: async (data) => {
-      setUser(data);
-      setToken(data.token);
-      setIsOtpVerified(false);
-      // Generate OTP after successful register
-      if (data?.email) {
-        try {
-          await generateOtpMutation.mutateAsync({ email: data.email });
-        } catch (e) {
-          // Optionally handle OTP error
-        }
-      }
-    },
-  });
+  // Registration flow removed
 
   // Verify OTP mutation
   const verifyOtpMutation = useMutation({
@@ -109,7 +85,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("isOtpVerified");
     loginMutation.reset();
-    registerMutation.reset();
   };
 
   return (
@@ -121,9 +96,6 @@ export const AuthProvider = ({ children }) => {
         login: loginMutation.mutate,
         loginStatus: loginMutation.status,
         loginError: loginMutation.error,
-        register: registerMutation.mutate,
-        registerStatus: registerMutation.status,
-        registerError: registerMutation.error,
         generateOtp: generateOtpMutation.mutate,
         generateOtpStatus: generateOtpMutation.status,
         generateOtpError: generateOtpMutation.error,

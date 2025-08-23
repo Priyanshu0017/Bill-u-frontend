@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, Store, Users, FileText, Settings, BarChart2, LogOut } from 'lucide-react';
 import { useAuth } from './AuthContext';
+import LogoImage from "../images/Group 106 (1).svg";
 
 const navItems = [
   { icon: LayoutDashboard, name: 'Dashboard', path: '/' },
@@ -29,8 +30,8 @@ const Sidebar = ({ onClose, mobile }) => {
       style={mobile ? { minHeight: '100vh' } : {}}
     >
       <div className="h-20 flex items-center px-8 justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">
-          <span className="text-yellow-400">B</span>ill-U
+        <h1 className=" font-bold text-gray-900">
+         <img src={LogoImage} alt="" className='' />
         </h1>
         {mobile && (
           <button onClick={onClose} className="ml-4 p-2 rounded-full hover:bg-gray-100 focus:outline-none">

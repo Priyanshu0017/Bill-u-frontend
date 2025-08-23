@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import { Link, useLocation } from "react-router-dom";
+import LogoImage from "../images/Group 106 (1).svg";
 
 import {
   LayoutDashboard,
@@ -40,7 +41,7 @@ const Layout = ({ children }) => {
       {/* Mobile Navbar */}
       <nav className="flex lg:hidden items-center justify-between px-4 py-3 bg-white shadow z-30 w-full fixed top-0 left-0 right-0">
         <div className="text-2xl font-bold text-bill-dark">
-          <span className="text-bill-yellow">B</span>ill-U
+          <img src={LogoImage} alt="" />
         </div>
         <button
           className="bg-white shadow rounded-full p-2 flex items-center justify-center focus:outline-none"
