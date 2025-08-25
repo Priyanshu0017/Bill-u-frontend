@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 
 const AuthContext = createContext();
 
-const API_BASE = "http://localhost:4400/api/auth";
+const API_BASE = "https://bill-u-backend.onrender.com/api/auth";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user")) || null);
