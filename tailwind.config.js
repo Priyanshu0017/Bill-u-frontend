@@ -17,9 +17,9 @@ export default {
         'bill-red': '#FF5B5B',
         'custom-gray-light': '#E3E3E3',
       },
-      // --- THIS IS THE KEY CHANGE ---
       fontFamily: {
-        sans: ['Poppins', ...defaultTheme.fontFamily.sans],
+        'sans': ['Poppins', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif'],
+        'poppins': ['Poppins', 'sans-serif'],
       },
     },
   },

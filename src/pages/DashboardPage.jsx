@@ -30,7 +30,7 @@ const DashboardPage = () => {
   return (
     <div className="">
       <div className="">
-        <Header />
+        <Header title="Dashboard" />
       </div>
 
       <div className="px-3.5 py-1 bg-gray-200">
