@@ -4,6 +4,10 @@ import Header from "../components/Header";
 import AdminStats from "../components/AdminStats";
 import AdminFilters from "../components/AdminFilters";
 import AdminTable from "../components/AdminTable";
+import CreateAdminWizard from "../components/CreateAdminWizard";
+import DeleteConfirmModal from "../components/DeleteConfirmModal";
+import AdminViewOverlay from "../components/AdminViewOverlay";
+import { useNavigate } from "react-router-dom";
 import img1 from "../images/imgprofile.svg";
 import img2 from "../images/right.svg";
 import img3 from "../images/cross.svg";
@@ -14,6 +18,11 @@ const AdminsPage = () => {
   const [sortFilter, setSortFilter] = useState("Newest First");
   const statusDropdownRef = useRef(null);
   const sortDropdownRef = useRef(null);
+  const [wizardOpen, setWizardOpen] = useState(false);
+  const [selectedAdmin, setSelectedAdmin] = useState(null);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [viewOpen, setViewOpen] = useState(false);
+  const navigate = useNavigate();
 
   // Mock data for admin statistics
   const adminStats = [
@@ -134,14 +143,38 @@ const AdminsPage = () => {
   );
 
   const handleCreateAdmin = () => {
-    // Add create admin logic here
-    console.log("Creating admin...");
+    setWizardOpen(true);
+  };
+
+  const handleWizardSubmit = (data) => {
+    console.log("Wizard submit", data);
+    setWizardOpen(false);
   };
 
   const handleResetFilters = () => {
     setSearchTerm("");
     setStatusFilter("All Status");
     setSortFilter("Newest First");
+  };
+
+  const handleEdit = (admin) => {
+    setSelectedAdmin(admin);
+    navigate("/admins/edit");
+  };
+
+  const handleView = (admin) => {
+    setSelectedAdmin(admin);
+    setViewOpen(true);
+  };
+
+  const handleDelete = (admin) => {
+    setSelectedAdmin(admin);
+    setConfirmOpen(true);
+  };
+
+  const confirmDelete = () => {
+    setConfirmOpen(false);
+    setSelectedAdmin(null);
   };
 
   useEffect(() => {
@@ -161,7 +194,7 @@ const AdminsPage = () => {
     <div>
       <Header title="Admin Control" />
       <div className="px-3.5 py-1 bg-gray-200">
-        <section className="bg-white rounded-xl mt-2 px-8 py-8">
+        <section className="bg-white rounded-xl mt-2 px-2 md:px-8 py-8">
           {/* Create Admin Button */}
           <div className="flex justify-end">
             <button
@@ -172,15 +205,22 @@ const AdminsPage = () => {
               Create Admin
             </button>
           </div>
+          {wizardOpen && (
+            <CreateAdminWizard
+              open={wizardOpen}
+              onClose={() => setWizardOpen(false)}
+              onSubmit={handleWizardSubmit}
+            />
+          )}
           {/* Admin Statistics Cards */}
-          <div className="flex px-7 space-x-10 mt-2">
+          <div className="flex flex-col sm:flex-col lg:flex-row px-3 sm:px-5 lg:px-7 gap-3 sm:gap-4 lg:gap-10 mt-2">
             {adminStats.map((stat, index) => (
               <AdminStats stat={stat} index={index} key={index} />
             ))}
           </div>
         </section>
         {/* Search and Filters Section */}
-        <div className="bg-white rounded-xl px-15 py-8 shadow-sm mt-3">
+        <div className="bg-white rounded-xl px-2 md:px-15 py-8 shadow-sm mt-3">
           <AdminFilters
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
@@ -192,9 +232,11 @@ const AdminsPage = () => {
             statusDropdownRef={statusDropdownRef}
             sortDropdownRef={sortDropdownRef}
           />
-          <AdminTable admins={filteredAdmins} />
+          <AdminTable admins={filteredAdmins} onEdit={handleEdit} onView={handleView} onDelete={handleDelete} />
         </div>
       </div>
+      <DeleteConfirmModal open={confirmOpen} name={selectedAdmin?.name} onCancel={() => setConfirmOpen(false)} onConfirm={confirmDelete} />
+      <AdminViewOverlay open={viewOpen} admin={selectedAdmin} onClose={() => setViewOpen(false)} />
     </div>
   );
 };

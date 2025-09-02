@@ -5,6 +5,7 @@ import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import OtpPage from "./pages/OtpPage";
 import AdminsPage from "./pages/AdminsPage";
+import EditAdminPage from "./pages/EditAdminPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 // Import page components
@@ -28,6 +29,7 @@ function App() {
                   <Route path="/" element={<DashboardPage />} />
                   <Route path="/shop-control" element={<ShopControlPage />} />
                   <Route path="/admins" element={<AdminsPage />} />
+                  <Route path="/admins/edit" element={<EditAdminPage />} />
                   <Route path="/analytics" element={<AnalyticsPage />} />
                   {/* <Route path="/audit-logs" element={<AuditLogsPage />} /> */}
                   <Route path="/settings" element={<SettingsPage />} />

@@ -19,7 +19,7 @@ const Overview = ({stats}) => {
           <ChevronDown className="pt-0.5 align-middle text-gray-500" />
         </button>
       </div>
-      <div className="pt-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="pt-6 grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 gap-4">
         {stats.map((stat) => (
           <StatCard key={stat.title} {...stat} />
         ))}
