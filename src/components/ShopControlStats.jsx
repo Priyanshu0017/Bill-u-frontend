@@ -26,3 +26,4 @@ const ShopControlStats = ({stat , index}) => {
 
 export default ShopControlStats;
 
+

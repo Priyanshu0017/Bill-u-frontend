@@ -17,15 +17,15 @@ const Header = ({ title = "Dashboard" }) => {
         <div className="flex items-center space-x-2">
           <div className='text-right'>
             <div className="font-semibold text-[10px] md:text-xs pl-3 md:pl-5.5">
-              {user?.role ? user.role : 'Role'}
+              {user?.role || user?.user?.role || 'Role'}
             </div>
             <div className="text-xs md:text-sm text-gray-500">
-              Hi, {user?.name ? user.name : 'User'}
+              Hi, {user?.name || user?.user?.name || 'User'}
             </div>
           </div>
           <img
-            src={`https://i.pravatar.cc/40?u=${user?.name || 'user'}`}
-            alt={user?.name || 'User'}
+            src={`https://i.pravatar.cc/40?u=${user?.name || user?.user?.name || 'user'}`}
+            alt={user?.name || user?.user?.name || 'User'}
             className="w-8 h-8 md:w-10 md:h-10 rounded-full"
           />
         </div>
